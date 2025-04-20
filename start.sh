@@ -1,3 +1,7 @@
 #!/bin/bash
-echo "Starting MCP proxy on port $PORT"
-npx --yes mcp-proxy --sse-host=0.0.0.0 --sse-port=$PORT -- node build/index.js
+# Hardcode the port to prevent detection loops
+export PORT=8080
+# Output to help debug
+echo "Starting MCP server on fixed port $PORT"
+# Execute the MCP proxy with explicit path to node executable
+/usr/local/bin/node /usr/local/bin/npx --yes mcp-proxy --sse-host=0.0.0.0 --sse-port=8080 node build/index.js
